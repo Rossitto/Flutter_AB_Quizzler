@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 void main() => runApp(Quizzler());
 
@@ -53,9 +52,13 @@ class _QuizPageState extends State<QuizPage> {
     'A slug\'s blood is green.' // true,
   ];
 
+  int questionNumber = -1;
+
+  List<bool> answers = [false, true, true];
+
   @override
   Widget build(BuildContext context) {
-    int randomIndex = Random().nextInt(3);
+    questionNumber += 1;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +70,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[randomIndex],
+                questions[questionNumber],
                 //questions.iterator.current,
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -95,7 +98,7 @@ class _QuizPageState extends State<QuizPage> {
                 setState(() {
                   scoreKeeper.add(right);
                 });
-                print('The user picked true! Index: $randomIndex');
+                print('The user picked true! Index: $questionNumber');
               },
             ),
           ),
@@ -116,7 +119,7 @@ class _QuizPageState extends State<QuizPage> {
                 setState(() {
                   scoreKeeper.add(wrong);
                 });
-                print('The user picked false. Index: $randomIndex');
+                print('The user picked false. Index: $questionNumber');
               },
             ),
           ),
