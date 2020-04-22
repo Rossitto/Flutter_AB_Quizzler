@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() => runApp(Quizzler());
 
@@ -46,8 +47,16 @@ class _QuizPageState extends State<QuizPage> {
     color: Colors.red,
   );
 
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.', // false,
+    'Approximately one quarter of human bones are in the feet.', // true,
+    'A slug\'s blood is green.' // true,
+  ];
+
   @override
   Widget build(BuildContext context) {
+    int randomIndex = Random().nextInt(3);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -58,7 +67,8 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questions[randomIndex],
+                //questions.iterator.current,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -85,7 +95,7 @@ class _QuizPageState extends State<QuizPage> {
                 setState(() {
                   scoreKeeper.add(right);
                 });
-                print('The user picked true!');
+                print('The user picked true! Index: $randomIndex');
               },
             ),
           ),
@@ -106,7 +116,7 @@ class _QuizPageState extends State<QuizPage> {
                 setState(() {
                   scoreKeeper.add(wrong);
                 });
-                print('The user picked false.');
+                print('The user picked false. Index: $randomIndex');
               },
             ),
           ),
@@ -118,9 +128,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
