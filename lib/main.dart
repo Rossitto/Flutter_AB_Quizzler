@@ -91,7 +91,13 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 bool correctAnswer =
                     quizBrain.getQuestionAnswer(questionNumber);
-//TODO: use bool correctAnswer
+
+                if (correctAnswer == true) {
+                  print('User got it right!');
+                } else {
+                  print('User got it wrong...');
+                }
+
                 setState(() {
                   scoreKeeper.add(right);
                 });
@@ -115,6 +121,12 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 bool correctAnswer =
                     quizBrain.getQuestionAnswer(questionNumber);
+
+                if (correctAnswer == false) {
+                  print('User got it right!');
+                } else {
+                  print('User got it wrong...');
+                }
 
                 setState(() {
                   scoreKeeper.add(wrong);
