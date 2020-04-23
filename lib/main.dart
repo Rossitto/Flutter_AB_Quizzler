@@ -28,16 +28,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scoreKeeper = [
-    Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    )
-  ];
+  List<Icon> scoreKeeper = [];
 
   Icon right = Icon(
     Icons.check,
@@ -49,12 +40,8 @@ class _QuizPageState extends State<QuizPage> {
     color: Colors.red,
   );
 
-  int questionNumber = -1;
-
   @override
   Widget build(BuildContext context) {
-    questionNumber++;
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,7 +52,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.getQuestionText(questionNumber),
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -89,8 +76,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer =
-                    quizBrain.getQuestionAnswer(questionNumber);
+                bool correctAnswer = quizBrain.getQuestionAnswer();
 
                 if (correctAnswer == true) {
                   print('User got it right!');
@@ -100,8 +86,8 @@ class _QuizPageState extends State<QuizPage> {
 
                 setState(() {
                   scoreKeeper.add(right);
+                  quizBrain.nextQuestion();
                 });
-                print('The user picked true! Index: $questionNumber');
               },
             ),
           ),
@@ -119,8 +105,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer =
-                    quizBrain.getQuestionAnswer(questionNumber);
+                bool correctAnswer = quizBrain.getQuestionAnswer();
 
                 if (correctAnswer == false) {
                   print('User got it right!');
@@ -130,8 +115,8 @@ class _QuizPageState extends State<QuizPage> {
 
                 setState(() {
                   scoreKeeper.add(wrong);
+                  quizBrain.nextQuestion();
                 });
-                print('The user picked false. Index: $questionNumber');
               },
             ),
           ),
