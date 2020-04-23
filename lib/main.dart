@@ -65,7 +65,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.questionBank[questionNumber].questionText,
+                quizBrain.getQuestionText(questionNumber),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -90,7 +90,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 bool correctAnswer =
-                    quizBrain.questionBank[questionNumber].questionAnswer;
+                    quizBrain.getQuestionAnswer(questionNumber);
+//TODO: use bool correctAnswer
                 setState(() {
                   scoreKeeper.add(right);
                 });
@@ -113,7 +114,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 bool correctAnswer =
-                    quizBrain.questionBank[questionNumber].questionAnswer;
+                    quizBrain.getQuestionAnswer(questionNumber);
+
                 setState(() {
                   scoreKeeper.add(wrong);
                 });
