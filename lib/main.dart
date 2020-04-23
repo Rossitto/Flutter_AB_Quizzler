@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 
@@ -47,35 +49,11 @@ class _QuizPageState extends State<QuizPage> {
     color: Colors.red,
   );
 
-  // List<String> questions = [
-  //   'You can lead a cow down stairs but not up stairs.', // false,
-  //   'Approximately one quarter of human bones are in the feet.', // true,
-  //   'A slug\'s blood is green.' // true,
-  // ];
-
-  // List<bool> answers = [false, true, true];
-
-  // Question q1 = Question(
-  //     q: 'You can lead a cow down stairs but not up stairs.', a: false);
-
-  // Question q2 = Question(
-  //     q: 'Approximately one quarter of human bones are in the feet.', a: true);
-
-  // Question q3 = Question(q: 'A slug\'s blood is green.', a: true);
-
-  List<Question> questionBank = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: true)
-  ];
-
   int questionNumber = -1;
 
   @override
   Widget build(BuildContext context) {
-    questionNumber += 1;
+    questionNumber++;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,7 +65,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionBank[questionNumber].questionText,
+                quizBrain.questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -112,7 +90,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 bool correctAnswer =
-                    questionBank[questionNumber].questionAnswer;
+                    quizBrain.questionBank[questionNumber].questionAnswer;
                 setState(() {
                   scoreKeeper.add(right);
                 });
@@ -135,7 +113,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 bool correctAnswer =
-                    questionBank[questionNumber].questionAnswer;
+                    quizBrain.questionBank[questionNumber].questionAnswer;
                 setState(() {
                   scoreKeeper.add(wrong);
                 });
